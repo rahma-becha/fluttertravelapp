@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
     return  MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
-        scaffoldBackgroundColor: Color(0xFFEDF2F6)
+        scaffoldBackgroundColor: Color(0xFFEDF2F6),
     ),
 
     home: WelcomeScreen()

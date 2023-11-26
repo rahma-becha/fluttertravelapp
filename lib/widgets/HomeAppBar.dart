@@ -51,7 +51,82 @@ class HomeAppBar extends StatelessWidget {
               SizedBox(width: 10,),
               InkWell(
                 onTap: (){
-                   launch("https://www.facebook.com/");
+                   showDialog(context: context, builder: (BuildContext context){
+                     return AlertDialog(
+                       title: Text("Choisir une option"),
+                       titleTextStyle: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 20),
+                       shape: RoundedRectangleBorder(
+                           borderRadius: BorderRadius.all(Radius.circular(20))
+                       ),
+                       content:Stack(
+                         alignment: Alignment.center,
+                         children: [
+                           Container(
+                             padding: EdgeInsets.zero,
+                             margin: EdgeInsets.zero,
+                             width: double.infinity,
+                             height: 150,
+                             child:  Column(
+                               children: [
+                                 InkWell(
+                                   onTap: (){
+                                     launch("https://www.messenger.com/?locale=fr_FR");
+                                   },
+                                   child: Row(
+                                     children: [
+                                       Image.asset("assets/messenger.png"),
+                                       SizedBox(width: 10,),
+
+                                       Text("Messenger",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
+                                     ],
+                                   ),
+                                 ),
+                                 InkWell(
+                                   onTap: (){
+                                     launch("tel:123");
+                                   },
+                                   child: Row(
+                                     children: [
+                                       Image.asset("assets/phone.png"),
+                                       SizedBox(width: 10,),
+
+                                       Text("Phone",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600))
+                                     ],
+                                   ),
+                                 ),
+                                 InkWell(
+                                   onTap: (){
+                                   //  launch("https://gmail.com/");
+                                     launchUrl(Uri(
+                                       scheme: "mailto",
+                                       path: "miniprojet708@gmail.com",
+                                       query:"mmm"
+                                     ));
+                                   },
+                                   child: Row(
+                                     children: [
+                                       Image.asset("assets/gmail.png"),
+                                       SizedBox(width: 10,),
+                                       Text("Email",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600))
+                                     ],
+                                   ),
+                                 )
+                               ],
+                             ),
+                           ),
+
+                         ],
+                       ),
+                       actions: [
+                         IconButton(
+                           onPressed: () {
+                             Navigator.of(context).pop();
+                           },
+                           icon: const Icon(Icons.close),
+                         ),
+                       ],
+                     );
+                   });
                 },
                 child: Container(
                   padding: EdgeInsets.all(10),

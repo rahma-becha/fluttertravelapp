@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:projetmobilev2/pages/reviews.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailsPage extends StatefulWidget {
@@ -111,7 +112,14 @@ class _DetailsPageState extends State<DetailsPage> {
                 Padding(
                   padding: const EdgeInsets.only(right: 4),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>Reviews()
+                          ));
+
+                    },
                     iconSize: 20,
                     icon: const Icon(Ionicons.chatbubble_ellipses_outline,size: 30,),
                   ),
