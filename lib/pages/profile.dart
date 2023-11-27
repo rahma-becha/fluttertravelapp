@@ -26,18 +26,15 @@ class _ProfileState extends State<Profile> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-            SizedBox(
-            height: 120,
-            width: 120,
-              child: ClipRRect(
+        ClipRRect(
                 borderRadius: BorderRadius.circular(50),
                 child: Image.asset(
-                  "assets/Profile.png",
+                  "assets/person1.png",
                   fit: BoxFit.cover,
                 ),
               ),
-            ),
-            SizedBox(height: 30,),
+
+            SizedBox(height: 25,),
             Container(
               padding: EdgeInsets.all(25),
               margin: EdgeInsets.only(left: 10,right: 10),

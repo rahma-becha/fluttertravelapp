@@ -44,10 +44,10 @@ class _CompteState extends State<Compte> {
             children: [
 
 
-              Image(image: AssetImage("assets/Profile.png"),height: 180, width: 160,),
+              Image(image: AssetImage("assets/person1.png")),
 
               Container(
-                padding: const EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 20.0),
+                padding: const EdgeInsets.fromLTRB(25.0, 20.0, 25.0, 20.0),
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -71,7 +71,7 @@ class _CompteState extends State<Compte> {
                         height: 40.0,
                       ),
                       TextFormField(
-                        controller: email,
+                        controller: nom,
                         decoration: InputDecoration(
                           label: const Text('Nom',style: TextStyle(color: Colors.black),),
                           hintText: 'Entrer Nom',

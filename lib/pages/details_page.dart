@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:projetmobilev2/pages/reviews.dart';
@@ -17,7 +15,7 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  String googleUrl = 'https://www.google.com/maps/search/?api=1&query=34.7614464,10.5854442,12';
+  String googleUrl = 'https://www.google.com/maps/search/?api=1&query=34.7614464,10.5854442';
 
   @override
   Widget build(BuildContext context) {
@@ -113,11 +111,25 @@ class _DetailsPageState extends State<DetailsPage> {
                   padding: const EdgeInsets.only(right: 4),
                   child: IconButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>Reviews()
-                          ));
+                      showModalBottomSheet(
+                          context: context,
+                        builder: (BuildContext context) {
+                          return ClipRRect(
+
+                            borderRadius: BorderRadius.circular(30.0),
+
+                            child: Container(
+                              color: Colors.white,
+                              child: Center(
+                                child: Reviews()
+                              ),
+                            ),
+                          );
+                        },
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                      );
 
                     },
                     iconSize: 20,

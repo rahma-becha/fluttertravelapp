@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:projetmobilev2/home_page.dart';
+import 'package:projetmobilev2/pages/register.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -49,12 +50,15 @@ String? get _errorText {
 
                   Container(
                     padding: const EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 20.0),
+                    height: MediaQuery.of(context).size.height*1.4,
                     decoration: const BoxDecoration(
                       color: Colors.white,
+
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(40.0),
                         topRight: Radius.circular(40.0),
                       ),
+
                     ),
                     child: Form(
                       key: _formKey,
@@ -258,7 +262,7 @@ String? get _errorText {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (e) =>  HomePage(),
+                                      builder: (e) =>  Register(),
                                     ),
                                   );
                                 },

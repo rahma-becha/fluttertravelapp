@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:projetmobilev2/pages/details_page.dart';
 import 'package:projetmobilev2/widgets/HomeAppBar.dart';
 import 'package:projetmobilev2/widgets/HomeBottomBar.dart';
-import 'package:projetmobilev2/widgets/places.dart';
 class WhishListPage extends StatefulWidget {
   const WhishListPage({super.key});
 
@@ -32,10 +31,6 @@ class _WhishListPageState extends State<WhishListPage> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // second child
-                Places(),
-                SizedBox(height: 10,),
-                // third child
                 ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,

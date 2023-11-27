@@ -25,13 +25,11 @@ class HomePage extends StatelessWidget {
         ),
       body: SafeArea(
          child: Padding(
-           padding: EdgeInsets.symmetric(vertical: 30),
+           padding: EdgeInsets.symmetric(vertical: 20),
            child: SingleChildScrollView(
              child: Column(
                children: [
                    LocationCard(),
-                   SizedBox(height: 20,),
-                   Places(),
                    SizedBox(height: 20,),
                  Row(
                    mainAxisAlignment: MainAxisAlignment.spaceBetween,

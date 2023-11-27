@@ -55,9 +55,23 @@ class NearbyPlaces extends StatelessWidget {
                               ),
                             ),
                             const Text("Portic Team",style: TextStyle(fontSize: 18),),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.location_on,
+                                  color: Color(0xFFF65959),
+                                  size: 18,
+                                ),
+                                const SizedBox(width: 5),
+                                const Text(
+                                  "French Polynesia",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                )
+                              ],
+                            ),
                             const SizedBox(height: 10),
-                            // DISTANCE WIDGET
-                           // const Distance(),
 
                             const Spacer(),
                             Row(
