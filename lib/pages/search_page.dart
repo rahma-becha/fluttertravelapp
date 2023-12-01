@@ -2,6 +2,9 @@
 import 'package:projetmobilev2/pages/details_page.dart';
 import 'package:projetmobilev2/widgets/HomeBottomBar.dart';
 
+import '../data/destination.dart';
+import '../models/Destination.dart';
+
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
 
@@ -10,15 +13,8 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
+  List<Destination> dataList = destinationList;
 
-  List _locations = [
-   "location 1",
-    "location 2",
-    "location 3",
-    "location 4",
-    "location 5"
-
-  ];
 
   List _founded = [];
   @override
@@ -31,7 +27,7 @@ class _SearchViewState extends State<SearchView> {
 
   onSearch(String search) {
     setState(() {
-      _founded= _locations.where((loc) => loc.contains(search)).toList();
+      _founded= destinationList.where((loc) => loc.name.contains(search)).toList();
     });
   }
   @override
@@ -76,7 +72,7 @@ class _SearchViewState extends State<SearchView> {
                   itemBuilder: (context, index) {
                      return InkWell(
                        onTap: (){
-                         Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage(image: "assets/city${index+1}.jpg")));
+                         Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage(destination: _founded[index],)));
                        },
 
                        child: Padding(
@@ -85,14 +81,14 @@ class _SearchViewState extends State<SearchView> {
                              leading: ClipOval(
                                child: SizedBox.fromSize(
                                  //size: Size.fromRadius(50), // Image radius
-                                 child: Image.asset('assets/city${index+1}.jpg', fit: BoxFit.cover , width:50,),
+                                 child: Image.asset(_founded[index].photo, fit: BoxFit.cover , width:50,),
                                ),
                              ),
                              trailing:IconButton(
                                onPressed: (){},
                                icon: Icon(Icons.close),
                              ),
-                             title: Text(_founded[index])),
+                             title: Text(_founded[index].name)),
                        )
                      );
                   }) : Center(child: Text("No result found", style: TextStyle(color: Colors.black),)),

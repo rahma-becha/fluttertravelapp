@@ -1,21 +1,23 @@
+import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:projetmobilev2/models/Destination.dart';
 import 'package:projetmobilev2/pages/reviews.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({
     Key? key,
-    required this.image,
+    required this.destination,
   }) : super(key: key);
-  final String image;
+  final Destination destination;
 
   @override
   State<DetailsPage> createState() => _DetailsPageState();
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  String googleUrl = 'https://www.google.com/maps/search/?api=1&query=34.7614464,10.5854442';
+  final faker=new Faker();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       borderRadius: const BorderRadius.vertical(
                           bottom: Radius.circular(20)),
                       image: DecorationImage(
-                        image: AssetImage(widget.image),
+                        image: AssetImage(widget.destination.photo),
                         fit: BoxFit.cover,
                       ),
                       boxShadow: [
@@ -87,12 +89,12 @@ class _DetailsPageState extends State<DetailsPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Sea of Peace",
+                      widget.destination.name,
                       style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      "Portic Team 8km",
+                      widget.destination.location,
                       style: TextStyle(fontSize: 18),
 
                     )
@@ -121,7 +123,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             child: Container(
                               color: Colors.white,
                               child: Center(
-                                child: Reviews()
+                                child: Reviews(reviewList: widget.destination.reviews,)
                               ),
                             ),
                           );
@@ -140,7 +142,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "4.6",
+                      widget.destination.rating.toString(),
                       style: TextStyle(fontSize: 18),
 
                     ),
@@ -160,19 +162,19 @@ class _DetailsPageState extends State<DetailsPage> {
             ),),
             SizedBox(height: 8,),
             Text(
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+              faker.lorem.words(60).toString().replaceAll("[", "").replaceAll("]", "").replaceAll(",", " "),
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w400
               ),
               textAlign: TextAlign.justify,
             ),
-            const SizedBox(height: 10),
+            /*const SizedBox(height: 10),
             Text("Activités",style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 20
             ),),
-            SizedBox(height: 8,),
+          SizedBox(height: 8,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -198,7 +200,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   )
               ],
             ),
-
+*/
             const SizedBox(height: 10),
             Text("Location",style: TextStyle(
                 fontWeight: FontWeight.w500,
@@ -207,7 +209,7 @@ class _DetailsPageState extends State<DetailsPage> {
             SizedBox(height: 8,),
             InkWell(
               onTap: (){
-                launch(googleUrl);
+                launch('https://www.google.com/maps/search/?api=1&query=${widget.destination.lat},${widget.destination.long}');
 
               },
               child:Container(
@@ -223,9 +225,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 ),
               ),
             ),
-            
-            //const SizedBox(height: 15),
-            //const Distance(),
+
 
             const SizedBox(height: 20),
             ElevatedButton(

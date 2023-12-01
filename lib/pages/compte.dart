@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:projetmobilev2/models/User.dart';
 import 'package:projetmobilev2/widgets/HomeBottomBar.dart';
-
 import '../widgets/HomeAppBar.dart';
+import 'package:projetmobilev2/data/user.dart';
 
 class Compte extends StatefulWidget {
   const Compte({super.key});
@@ -72,6 +72,7 @@ class _CompteState extends State<Compte> {
                       ),
                       TextFormField(
                         controller: nom,
+
                         decoration: InputDecoration(
                           label: const Text('Nom',style: TextStyle(color: Colors.black),),
                           hintText: 'Entrer Nom',
@@ -96,6 +97,7 @@ class _CompteState extends State<Compte> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
+
                       ),
 
                       const SizedBox(

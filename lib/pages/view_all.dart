@@ -1,7 +1,10 @@
+import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:projetmobilev2/pages/details_page.dart';
 
+import '../data/destination.dart';
+import '../models/Destination.dart';
 import '../widgets/HomeAppBar.dart';
 import '../widgets/HomeBottomBar.dart';
 class ViewAll extends StatefulWidget {
@@ -17,14 +20,8 @@ class ViewAll extends StatefulWidget {
 
 class _ViewAllState extends State<ViewAll> {
 
-  var categories=[
-    "Cities",
-    "Places",
-    "Hotels",
-    "Restaurents",
-    "Events",
-    "Activities"
-  ];
+  List<Destination> dataList = destinationList;
+   final faker=new Faker();
   @override
   Widget build(BuildContext context) {
     return     Scaffold(
@@ -53,7 +50,7 @@ class _ViewAllState extends State<ViewAll> {
                 ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: categories.length,
+                  itemCount: dataList.length,
                   itemBuilder: (context,index){
                     return Padding(padding: EdgeInsets.all(10),
                       child: Container(
@@ -67,7 +64,7 @@ class _ViewAllState extends State<ViewAll> {
                             children: [
                               InkWell(
                                 onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage(image: "assets/city${index+1}.jpg")));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage(destination: dataList[index])));
 
                                 },
                                 child: Container(
@@ -76,7 +73,7 @@ class _ViewAllState extends State<ViewAll> {
                                       color: Colors.black,
                                       borderRadius: BorderRadius.circular(15),
                                       image: DecorationImage(
-                                          image: AssetImage("assets/city${index+1}.jpg"),
+                                          image: AssetImage(dataList[index].photo),
                                           fit:BoxFit.cover
                                       )
                                   ),
@@ -87,7 +84,7 @@ class _ViewAllState extends State<ViewAll> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text("City Name",style: TextStyle(
+                                    Text(dataList[index].name,style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w600
                                     ),),
@@ -102,14 +99,7 @@ class _ViewAllState extends State<ViewAll> {
                                   icon: const Icon(Icons.favorite_outline,size: 30,),
                                 ),
                               ),
-/*                              Padding(
-                                padding: const EdgeInsets.only(right: 4),
-                                child: IconButton(
-                                  onPressed: () {},
-                                  iconSize: 20,
-                                  icon: const Icon(Ionicons.chatbubble_ellipses_outline,size: 20,),
-                                ),
-                              ),*/
+
 
 
                                       ],
@@ -123,16 +113,18 @@ class _ViewAllState extends State<ViewAll> {
                               Column(
                                 children: [
 
-                                  Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",                          style: TextStyle(
+                                  Text(
+                                    faker.lorem.words(25).toString().replaceAll("[", "").replaceAll("]", "").replaceAll(",", " "),
+                                    style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.normal
-                                  ),),
+                                  ),textAlign: TextAlign.justify,),
 
                                   Padding(padding: EdgeInsets.all(10),
                                     child: Row(
                                       children: [
                                         Text(
-                                          "4.6",
+                                          dataList[index].rating.toString(),
                                           style: TextStyle(fontSize: 18),
 
                                         ),
@@ -146,7 +138,7 @@ class _ViewAllState extends State<ViewAll> {
                                                 color: Color(0xFFF65959),
                                               ),
 
-                                              text: "\$22",
+                                              text: dataList[index].prix.toString()+" TND",
                                               children: const [
                                                 TextSpan(
                                                     style: TextStyle(

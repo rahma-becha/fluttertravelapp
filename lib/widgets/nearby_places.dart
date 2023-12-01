@@ -1,19 +1,30 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
 
-class NearbyPlaces extends StatelessWidget {
-   NearbyPlaces({Key? key}) : super(key: key);
-   var categories=[
-     "Best Places",
-     "Most Visited",
-     "Favourities",
-     "New Added",
-     "Hotels",
-     "Restaurents"
-   ];
+import 'package:faker/faker.dart';
+import 'package:flutter/material.dart';
+import 'package:projetmobilev2/data/destination.dart';
+import 'package:projetmobilev2/models/Destination.dart';
+import 'package:projetmobilev2/models/Review.dart';
+
+class NearbyPlaces extends StatefulWidget {
+  const NearbyPlaces({super.key});
+
+  @override
+  State<NearbyPlaces> createState() => _NearbyPlacesState();
+}
+
+class _NearbyPlacesState extends State<NearbyPlaces> {
+  List<Destination> dataList = destinationList;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: List.generate(categories.length, (index) {
+      children: List.generate(dataList.length, (index) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: SizedBox(
@@ -26,9 +37,7 @@ class NearbyPlaces extends StatelessWidget {
               ),
               child: InkWell(
                 borderRadius: BorderRadius.circular(12),
-                onTap: () {
-
-                },
+                onTap: () {},
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -36,7 +45,7 @@ class NearbyPlaces extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: Image.asset(
-                          "assets/city${index+1}.jpg",
+                          dataList[index].photo,
                           height: double.maxFinite,
                           width: 130,
                           fit: BoxFit.cover,
@@ -47,14 +56,13 @@ class NearbyPlaces extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Sea of Peace",
+                            Text(
+                              dataList[index].name,
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            const Text("Portic Team",style: TextStyle(fontSize: 18),),
                             Row(
                               children: [
                                 Icon(
@@ -63,16 +71,20 @@ class NearbyPlaces extends StatelessWidget {
                                   size: 18,
                                 ),
                                 const SizedBox(width: 5),
-                                const Text(
-                                  "French Polynesia",
+                                 Text(
+                                  dataList[index].location,
                                   style: TextStyle(
                                     fontSize: 16,
                                   ),
                                 )
                               ],
                             ),
-                            const SizedBox(height: 10),
+                             Text(
+                              dataList[index].description,
+                              style: TextStyle(fontSize: 18),
+                            ),
 
+                            const SizedBox(height: 10),
                             const Spacer(),
                             Row(
                               children: [
@@ -81,8 +93,8 @@ class NearbyPlaces extends StatelessWidget {
                                   color: Colors.yellow.shade700,
                                   size: 30,
                                 ),
-                                const Text(
-                                  "4.5",
+                                 Text(
+                                  dataList[index].rating.toString(),
                                   style: TextStyle(
                                     fontSize: 20,
                                   ),
@@ -94,7 +106,7 @@ class NearbyPlaces extends StatelessWidget {
                                         fontSize: 20,
                                         color: Color(0xFFF65959),
                                       ),
-                                      text: "\$22",
+                                      text: dataList[index].prix.toString()+" TND",
                                       children: const [
                                         TextSpan(
                                             style: TextStyle(

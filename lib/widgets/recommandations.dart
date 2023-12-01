@@ -1,16 +1,14 @@
+import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:projetmobilev2/pages/details_page.dart';
+
+import '../data/destination.dart';
+import '../models/Destination.dart';
 class Recemandations extends StatelessWidget {
    Recemandations({super.key});
-  var categories=[
-    "Best Places",
-    "Most Visited",
-    "Favourities",
-    "New Added",
-    "Hotels",
-    "Restaurents"
-  ];
-  @override
+   List<Destination> dataList = destinationList;
+
+   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 235,
@@ -33,8 +31,7 @@ class Recemandations extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DetailsPage(
-                            image:"assets/city${index+1}.jpg",
+                          builder: (context) => DetailsPage(destination:dataList[index],
                           ),
                         ));
                   },
@@ -45,7 +42,7 @@ class Recemandations extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Image.asset(
-                            "assets/city${index+1}.jpg",
+                            dataList[index].photo,
                             width: double.maxFinite,
                             fit: BoxFit.cover,
                             height: 150,
@@ -54,8 +51,8 @@ class Recemandations extends StatelessWidget {
                         const SizedBox(height: 5),
                         Row(
                           children: [
-                            const Text(
-                              "St Regis Bora Bora",
+                             Text(
+                              dataList[index].name,
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -67,8 +64,8 @@ class Recemandations extends StatelessWidget {
                               color: Colors.yellow.shade700,
                               size: 18,
                             ),
-                            const Text(
-                              "4.4",
+                             Text(
+                              dataList[index].rating.toString(),
                               style: TextStyle(
                                 fontSize: 12,
                               ),
@@ -84,8 +81,8 @@ class Recemandations extends StatelessWidget {
                               size: 18,
                             ),
                             const SizedBox(width: 5),
-                            const Text(
-                              "French Polynesia",
+                             Text(
+                              dataList[index].location,
                               style: TextStyle(
                                 fontSize: 16,
                               ),
@@ -102,7 +99,7 @@ class Recemandations extends StatelessWidget {
           separatorBuilder: (context, index) => const Padding(
             padding: EdgeInsets.only(right: 10),
           ),
-          itemCount: categories.length),
+          itemCount: dataList.length),
     );
   }
 }

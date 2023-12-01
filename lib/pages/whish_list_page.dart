@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:projetmobilev2/pages/details_page.dart';
 import 'package:projetmobilev2/widgets/HomeAppBar.dart';
 import 'package:projetmobilev2/widgets/HomeBottomBar.dart';
+
+import '../data/destination.dart';
+import '../models/Destination.dart';
 class WhishListPage extends StatefulWidget {
   const WhishListPage({super.key});
 
@@ -10,14 +13,8 @@ class WhishListPage extends StatefulWidget {
 }
 
 class _WhishListPageState extends State<WhishListPage> {
-  var categories=[
-    "Cities",
-    "Places",
-    "Hotels",
-    "Restaurents",
-    "Events",
-    "Activities"
-  ];
+  List<Destination> dataList = destinationList;
+
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -34,7 +31,7 @@ class _WhishListPageState extends State<WhishListPage> {
                 ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: categories.length,
+                  itemCount: dataList.length,
                   itemBuilder: (context,index){
                     return Padding(padding: EdgeInsets.all(10),
                     child: Container(
@@ -48,7 +45,7 @@ class _WhishListPageState extends State<WhishListPage> {
                           children: [
                             InkWell(
                               onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage(image: "assets/city${index+1}.jpg")));
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage(destination: dataList[index],)));
 
                               },
                               child: Container(
@@ -57,7 +54,7 @@ class _WhishListPageState extends State<WhishListPage> {
                                     color: Colors.black,
                                     borderRadius: BorderRadius.circular(15),
                                     image: DecorationImage(
-                                        image: AssetImage("assets/city${index+1}.jpg"),
+                                        image: AssetImage(dataList[index].photo),
                                         fit:BoxFit.cover
                                     )
                                 ),
@@ -68,7 +65,7 @@ class _WhishListPageState extends State<WhishListPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("City Name",style: TextStyle(
+                                  Text(dataList[index].name,style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w600
                                   ),),
@@ -104,17 +101,19 @@ class _WhishListPageState extends State<WhishListPage> {
                            Column(
                              children: [
 
-                                  Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",                          style: TextStyle(
+                                  Text(
+                                    faker.lorem.words(25).toString().replaceAll("[", "").replaceAll("]", "").replaceAll(",", " "),
+                                    style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.normal
-                                    ),),
+                                    ),textAlign: TextAlign.justify,),
 
                                  Padding(padding: EdgeInsets.all(10),
                                  child: Row(
                                    mainAxisAlignment: MainAxisAlignment.end,
                                    children: [
                                      Text(
-                                       "4.6",
+                                       dataList[index].rating.toString(),
                                        style: TextStyle(fontSize: 18),
 
                                      ),
@@ -128,7 +127,7 @@ class _WhishListPageState extends State<WhishListPage> {
                                              color: Color(0xFFF65959),
                                            ),
 
-                                           text: "\$22",
+                                           text: dataList[index].prix.toString()+" TND",
                                            children: const [
                                              TextSpan(
                                                  style: TextStyle(
