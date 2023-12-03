@@ -1,10 +1,8 @@
-import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:projetmobilev2/pages/details_page.dart';
 
-import '../data/destination.dart';
 import '../models/Destination.dart';
+import '../services/destinationService.dart';
 import '../widgets/HomeAppBar.dart';
 import '../widgets/HomeBottomBar.dart';
 class ViewAll extends StatefulWidget {
@@ -19,11 +17,22 @@ class ViewAll extends StatefulWidget {
 }
 
 class _ViewAllState extends State<ViewAll> {
+  Future<List<Destination>> futureDestinations=DestinationService().getAllDestinations();
 
-  List<Destination> dataList = destinationList;
-   final faker=new Faker();
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder<List<Destination>>(
+        future: futureDestinations,
+        builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(child: CircularProgressIndicator());
+      }
+
+      if (snapshot.hasError) {
+        return Center(child: Text('Error: ${snapshot.error}'));
+      }
+
+      final destinations = snapshot.data!;
     return     Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(90.0),
@@ -50,7 +59,7 @@ class _ViewAllState extends State<ViewAll> {
                 ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: dataList.length,
+                  itemCount: destinations.length,
                   itemBuilder: (context,index){
                     return Padding(padding: EdgeInsets.all(10),
                       child: Container(
@@ -64,7 +73,7 @@ class _ViewAllState extends State<ViewAll> {
                             children: [
                               InkWell(
                                 onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage(destination: dataList[index])));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage(destination: destinations[index])));
 
                                 },
                                 child: Container(
@@ -73,7 +82,7 @@ class _ViewAllState extends State<ViewAll> {
                                       color: Colors.black,
                                       borderRadius: BorderRadius.circular(15),
                                       image: DecorationImage(
-                                          image: AssetImage(dataList[index].photo),
+                                          image: AssetImage(destinations[index].photo),
                                           fit:BoxFit.cover
                                       )
                                   ),
@@ -84,7 +93,7 @@ class _ViewAllState extends State<ViewAll> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(dataList[index].name,style: TextStyle(
+                                    Text(destinations[index].name,style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.w600
                                     ),),
@@ -114,7 +123,7 @@ class _ViewAllState extends State<ViewAll> {
                                 children: [
 
                                   Text(
-                                    faker.lorem.words(25).toString().replaceAll("[", "").replaceAll("]", "").replaceAll(",", " "),
+                                    destinations[index].description.substring(0,151)+"...",
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.normal
@@ -124,7 +133,7 @@ class _ViewAllState extends State<ViewAll> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          dataList[index].rating.toString(),
+                                          destinations[index].rating.toString(),
                                           style: TextStyle(fontSize: 18),
 
                                         ),
@@ -138,7 +147,7 @@ class _ViewAllState extends State<ViewAll> {
                                                 color: Color(0xFFF65959),
                                               ),
 
-                                              text: dataList[index].prix.toString()+" TND",
+                                              text: destinations[index].prix.toString()+" TND",
                                               children: const [
                                                 TextSpan(
                                                     style: TextStyle(
@@ -166,6 +175,6 @@ class _ViewAllState extends State<ViewAll> {
         ),
       ),
       bottomNavigationBar: HomeBottomBar(selectedIndex: "0",),
-    );
+    );});
   }
 }

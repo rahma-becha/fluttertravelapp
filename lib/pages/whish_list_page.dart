@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:projetmobilev2/models/whishlist.dart';
 import 'package:projetmobilev2/pages/details_page.dart';
+import 'package:projetmobilev2/services/whishlistService.dart';
 import 'package:projetmobilev2/widgets/HomeAppBar.dart';
 import 'package:projetmobilev2/widgets/HomeBottomBar.dart';
 
@@ -13,10 +15,22 @@ class WhishListPage extends StatefulWidget {
 }
 
 class _WhishListPageState extends State<WhishListPage> {
-  List<Destination> dataList = destinationList;
+  Future<List<WhishList>> futureWhishList=WhishListService().getAllWhishList();
 
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder<List<WhishList>>(
+        future: futureWhishList,
+        builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(child: CircularProgressIndicator());
+      }
+
+      if (snapshot.hasError) {
+        return Center(child: Text('Error: ${snapshot.error}'));
+      }
+
+      final whishlists = snapshot.data!;
     return  Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(90.0),
@@ -31,7 +45,7 @@ class _WhishListPageState extends State<WhishListPage> {
                 ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: dataList.length,
+                  itemCount: whishlists.length,
                   itemBuilder: (context,index){
                     return Padding(padding: EdgeInsets.all(10),
                     child: Container(
@@ -45,7 +59,7 @@ class _WhishListPageState extends State<WhishListPage> {
                           children: [
                             InkWell(
                               onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage(destination: dataList[index],)));
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage(destination: whishlists[index].destination,)));
 
                               },
                               child: Container(
@@ -54,7 +68,7 @@ class _WhishListPageState extends State<WhishListPage> {
                                     color: Colors.black,
                                     borderRadius: BorderRadius.circular(15),
                                     image: DecorationImage(
-                                        image: AssetImage(dataList[index].photo),
+                                        image: AssetImage(whishlists[index].destination.photo),
                                         fit:BoxFit.cover
                                     )
                                 ),
@@ -65,7 +79,7 @@ class _WhishListPageState extends State<WhishListPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(dataList[index].name,style: TextStyle(
+                                  Text(whishlists[index].destination.name,style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w600
                                   ),),
@@ -102,7 +116,7 @@ class _WhishListPageState extends State<WhishListPage> {
                              children: [
 
                                   Text(
-                                    faker.lorem.words(25).toString().replaceAll("[", "").replaceAll("]", "").replaceAll(",", " "),
+                                    whishlists[index].destination.description.substring(1,151)+"...",
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.normal
@@ -113,7 +127,7 @@ class _WhishListPageState extends State<WhishListPage> {
                                    mainAxisAlignment: MainAxisAlignment.end,
                                    children: [
                                      Text(
-                                       dataList[index].rating.toString(),
+                                       whishlists[index].destination.rating.toString(),
                                        style: TextStyle(fontSize: 18),
 
                                      ),
@@ -127,7 +141,7 @@ class _WhishListPageState extends State<WhishListPage> {
                                              color: Color(0xFFF65959),
                                            ),
 
-                                           text: dataList[index].prix.toString()+" TND",
+                                           text: whishlists[index].destination.prix.toString()+" TND",
                                            children: const [
                                              TextSpan(
                                                  style: TextStyle(
@@ -155,6 +169,6 @@ class _WhishListPageState extends State<WhishListPage> {
         ),
       ),
       bottomNavigationBar: HomeBottomBar(selectedIndex: "2",),
-    );
+    );});
   }
 }

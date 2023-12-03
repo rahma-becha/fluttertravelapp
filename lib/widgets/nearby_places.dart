@@ -6,6 +6,8 @@ import 'package:projetmobilev2/data/destination.dart';
 import 'package:projetmobilev2/models/Destination.dart';
 import 'package:projetmobilev2/models/Review.dart';
 
+import '../services/destinationService.dart';
+
 class NearbyPlaces extends StatefulWidget {
   const NearbyPlaces({super.key});
 
@@ -14,7 +16,7 @@ class NearbyPlaces extends StatefulWidget {
 }
 
 class _NearbyPlacesState extends State<NearbyPlaces> {
-  List<Destination> dataList = destinationList;
+  Future<List<Destination>> futureDestinations=DestinationService().getAllDestinations();
 
   @override
   void initState() {
@@ -23,8 +25,20 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
 
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder<List<Destination>>(
+        future: futureDestinations,
+        builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(child: CircularProgressIndicator());
+      }
+
+      if (snapshot.hasError) {
+        return Center(child: Text('Error: ${snapshot.error}'));
+      }
+
+      final destinations = snapshot.data!;
     return Column(
-      children: List.generate(dataList.length, (index) {
+      children: List.generate(destinations.length, (index) {
         return Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: SizedBox(
@@ -45,7 +59,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: Image.asset(
-                          dataList[index].photo,
+                          destinations[index].photo,
                           height: double.maxFinite,
                           width: 130,
                           fit: BoxFit.cover,
@@ -57,7 +71,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              dataList[index].name,
+                              destinations[index].name,
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -72,7 +86,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                                 ),
                                 const SizedBox(width: 5),
                                  Text(
-                                  dataList[index].location,
+                                  destinations[index].location,
                                   style: TextStyle(
                                     fontSize: 16,
                                   ),
@@ -80,8 +94,9 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                               ],
                             ),
                              Text(
-                              dataList[index].description,
+                              destinations[index].description.substring(0,45)+"...",
                               style: TextStyle(fontSize: 18),
+                               textAlign: TextAlign.justify,
                             ),
 
                             const SizedBox(height: 10),
@@ -94,7 +109,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                                   size: 30,
                                 ),
                                  Text(
-                                  dataList[index].rating.toString(),
+                                  destinations[index].rating.toString(),
                                   style: TextStyle(
                                     fontSize: 20,
                                   ),
@@ -106,7 +121,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                                         fontSize: 20,
                                         color: Color(0xFFF65959),
                                       ),
-                                      text: dataList[index].prix.toString()+" TND",
+                                      text: destinations[index].prix.toString()+" TND",
                                       children: const [
                                         TextSpan(
                                             style: TextStyle(
@@ -129,6 +144,6 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
           ),
         );
       }),
-    );
+    );});
   }
 }

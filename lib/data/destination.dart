@@ -6,7 +6,7 @@ import 'dart:math';
 final faker = new Faker();
 List<Destination> destinationList = [
   Destination(
-      id: 1,
+      id: "1",
       name: faker.address.city(),
       location: "Sit amet nisl suscipit",
       lat: faker.geo.latitude(),
@@ -18,7 +18,7 @@ List<Destination> destinationList = [
        reviews: reviewList
   ),
   Destination(
-      id: 2,
+      id: "2",
       name: faker.address.city(),
       location: "Sit amet nisl suscipit",
       lat: faker.geo.latitude(),
@@ -29,7 +29,7 @@ List<Destination> destinationList = [
       prix: 55,
       reviews: reviewList),
   Destination(
-      id: 3,
+      id: "3",
       name: faker.address.city(),
       location: "Sit amet nisl suscipit",
       lat: faker.geo.latitude(),
@@ -40,7 +40,7 @@ List<Destination> destinationList = [
       prix: 55,
       reviews: reviewList),
   Destination(
-      id: 4,
+      id: "4",
       name: faker.address.city(),
       location: "Sit amet nisl suscipit",
       lat: faker.geo.latitude(),
@@ -51,7 +51,7 @@ List<Destination> destinationList = [
       prix: 55,
       reviews: reviewList),
   Destination(
-      id: 5,
+      id: "5",
       name: faker.address.city(),
       location: "Sit amet nisl suscipit",
       lat: faker.geo.latitude(),
@@ -62,7 +62,7 @@ List<Destination> destinationList = [
       prix: 55,
       reviews: reviewList),
   Destination(
-      id: 6,
+      id: "6",
       name: faker.address.city(),
       location: "Sit amet nisl suscipit",
       lat: faker.geo.latitude(),

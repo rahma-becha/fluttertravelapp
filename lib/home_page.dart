@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
                    ],
                  ),
 
-                 Recemandations(),
+                 Recommandation(),
                    SizedBox(height: 20,),
                  Row(
                    mainAxisAlignment: MainAxisAlignment.spaceBetween,

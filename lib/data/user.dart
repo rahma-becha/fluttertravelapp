@@ -1,6 +1,7 @@
 import 'package:projetmobilev2/models/User.dart';
 
 final user=new User(
+    id: "1",
     nom:"user",
     prenom:"user",
     email: "user@gmail.com",

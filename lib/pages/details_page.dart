@@ -138,21 +138,15 @@ class _DetailsPageState extends State<DetailsPage> {
                     icon: const Icon(Ionicons.chatbubble_ellipses_outline,size: 30,),
                   ),
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      widget.destination.rating.toString(),
-                      style: TextStyle(fontSize: 18),
+                Padding(padding: EdgeInsets.all(4),
+                child:  InkWell(
+                  onTap: (){
+                    launch('https://www.google.com/maps/search/?api=1&query=${widget.destination.lat},${widget.destination.long}');
 
-                    ),
-                    Icon(
-                      Ionicons.star,
-                      color: Colors.yellow[800],
-                      size: 20,
-                    )
-                  ],
-                )
+                  },
+                  child:Image(image: AssetImage("assets/google-maps.png"),width: 30,)
+                ),),
+
               ],
             ),
             SizedBox(height: 10,),
@@ -162,70 +156,13 @@ class _DetailsPageState extends State<DetailsPage> {
             ),),
             SizedBox(height: 8,),
             Text(
-              faker.lorem.words(60).toString().replaceAll("[", "").replaceAll("]", "").replaceAll(",", " "),
+              widget.destination.description,
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w400
               ),
               textAlign: TextAlign.justify,
             ),
-            /*const SizedBox(height: 10),
-            Text("Activités",style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 20
-            ),),
-          SizedBox(height: 8,),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                for(int i=0; i<=5;i++)
-
-                  Row(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(left: 10,right: 10),
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.black),
-                        width: 10,
-                        height: 10,
-                      ),
-
-                      Text("Activité ${i+1}",
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400
-                        ),
-                        textAlign: TextAlign.justify,),
-                    ],
-                  )
-              ],
-            ),
-*/
-            const SizedBox(height: 10),
-            Text("Location",style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 20
-            ),),
-            SizedBox(height: 8,),
-            InkWell(
-              onTap: (){
-                launch('https://www.google.com/maps/search/?api=1&query=${widget.destination.lat},${widget.destination.long}');
-
-              },
-              child:Container(
-                height: 200,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Theme.of(context).colorScheme.secondary.withOpacity(0.1),
-                  image: const DecorationImage(
-                    image: AssetImage('assets/map1.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
-
 
             const SizedBox(height: 20),
             ElevatedButton(
