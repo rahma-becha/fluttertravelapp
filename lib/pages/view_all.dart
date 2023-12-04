@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projetmobilev2/pages/details_page.dart';
+import 'package:projetmobilev2/services/whishlistService.dart';
 
 import '../models/Destination.dart';
 import '../services/destinationService.dart';
@@ -18,7 +19,9 @@ class ViewAll extends StatefulWidget {
 
 class _ViewAllState extends State<ViewAll> {
   Future<List<Destination>> futureDestinations=DestinationService().getAllDestinations();
-
+  addToWhilslist(String destination_id){
+    WhishListService().addToWhishList(destination_id);
+  }
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Destination>>(
@@ -103,7 +106,9 @@ class _ViewAllState extends State<ViewAll> {
                                         Padding(
                                     padding: const EdgeInsets.only(right: 2),
                                 child: IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    addToWhilslist(destinations[index].id);
+                                  },
                                   iconSize: 20,
                                   icon: const Icon(Icons.favorite_outline,size: 30,),
                                 ),

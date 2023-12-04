@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
                      Padding(padding: EdgeInsets.all(10),
                        child:Container(
                          alignment: Alignment.topLeft,
-                         child:  Text("Recommandations",
+                         child:  Text("Nouvelles",
                            style: TextStyle(
                                fontWeight: FontWeight.bold,
                                fontSize: 20
@@ -62,7 +62,7 @@ class HomePage extends StatelessWidget {
                      Padding(padding: EdgeInsets.all(10),
                        child:Container(
                          alignment: Alignment.topLeft,
-                         child:  Text("Nearby Places",
+                         child:  Text("Most Visited",
                            style: TextStyle(
                                fontWeight: FontWeight.bold,
                                fontSize: 20

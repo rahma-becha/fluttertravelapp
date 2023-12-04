@@ -2,7 +2,6 @@
 import 'package:projetmobilev2/pages/details_page.dart';
 import 'package:projetmobilev2/widgets/HomeBottomBar.dart';
 
-import '../data/destination.dart';
 import '../models/Destination.dart';
 
 class SearchView extends StatefulWidget {
@@ -13,7 +12,9 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
-  List<Destination> dataList = destinationList;
+  List<Destination> dataList = [
+    new Destination(id: "id", name: "name", lat: 34.12, long: 10.12, location: "location", description: "description", photo: "photo", rating: 4.6, prix: 55, reviews: [])
+  ];
 
 
   List _founded = [];
@@ -27,7 +28,7 @@ class _SearchViewState extends State<SearchView> {
 
   onSearch(String search) {
     setState(() {
-      _founded= destinationList.where((loc) => loc.name.contains(search)).toList();
+      _founded= dataList.where((loc) => loc.name.contains(search)).toList();
     });
   }
   @override

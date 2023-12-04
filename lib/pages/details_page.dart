@@ -1,9 +1,11 @@
-import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:projetmobilev2/models/Destination.dart';
+import 'package:projetmobilev2/pages/addReservation.dart';
 import 'package:projetmobilev2/pages/reviews.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../services/whishlistService.dart';
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({
@@ -17,8 +19,9 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  final faker=new Faker();
-
+  addToWhilslist(String destination_id){
+    WhishListService().addToWhishList(destination_id);
+  }
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -104,7 +107,9 @@ class _DetailsPageState extends State<DetailsPage> {
                 Padding(
                   padding: const EdgeInsets.only(right: 2),
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      addToWhilslist(widget.destination.id);
+                    },
                     iconSize: 20,
                     icon: const Icon(Icons.favorite_outline,size: 30,),
                   ),
@@ -123,7 +128,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             child: Container(
                               color: Colors.white,
                               child: Center(
-                                child: Reviews(reviewList: widget.destination.reviews,)
+                                child: Reviews(destination_id: widget.destination.id,)
                               ),
                             ),
                           );
@@ -166,7 +171,10 @@ class _DetailsPageState extends State<DetailsPage> {
 
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>AddReservation(destination:widget.destination ,)));
+
+              },
 
               style: ElevatedButton.styleFrom(
                 elevation: 0,
@@ -177,7 +185,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   horizontal: 8.0,
                 ),
               ),
-              child: const Text("Join this tour",style: TextStyle(
+              child: const Text("Réserver",style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.w600

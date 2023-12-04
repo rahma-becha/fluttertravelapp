@@ -15,15 +15,5 @@ class User{
     required this.mdp,
     required this.photo
   });
-  factory User.fromMap(Map<String, dynamic> data) {
-    return User(
-        id: data["id"],
-        nom: data['nom'],
-        prenom: data['prenom'],
-        email: data["email"],
-        tel: data["tel"],
-        mdp: data["mdp"],
-        photo: data["photo"],
-       );
-  }
+
 }

@@ -24,17 +24,5 @@ class Destination {
       required this.rating,
       required this.prix,
       required this.reviews});
-  factory Destination.fromMap(Map<String, dynamic> data) {
-    return Destination(
-        id: data["id"],
-        name: data['name'],
-        lat: data['lat'],
-        long: data["long"],
-        location: data["location"],
-        description: data["description"],
-        photo: data["photo"],
-        rating: data["rating"],
-        prix: data["prix"],
-        reviews: []);
-  }
+
 }

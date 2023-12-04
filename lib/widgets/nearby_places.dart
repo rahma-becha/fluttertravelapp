@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
-import 'package:projetmobilev2/data/destination.dart';
 import 'package:projetmobilev2/models/Destination.dart';
 import 'package:projetmobilev2/models/Review.dart';
 
+import '../pages/details_page.dart';
 import '../services/destinationService.dart';
 
 class NearbyPlaces extends StatefulWidget {
@@ -51,7 +51,14 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
               ),
               child: InkWell(
                 borderRadius: BorderRadius.circular(12),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailsPage(destination:destinations[index],
+                        ),
+                      ));
+                },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(

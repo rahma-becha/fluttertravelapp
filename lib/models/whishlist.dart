@@ -6,11 +6,4 @@ class WhishList {
   User user;
   Destination destination;
   WhishList({required this.id, required this.user, required this.destination});
-  factory WhishList.fromMap(Map<String, dynamic> data) {
-    return WhishList(
-      id: data["id"],
-      user: data['user'],
-      destination: data['destination'],
-    );
-  }
 }

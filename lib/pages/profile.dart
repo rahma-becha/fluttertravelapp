@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:projetmobilev2/pages/compte.dart';
-import 'package:projetmobilev2/pages/reservations.dart';
+import 'package:projetmobilev2/pages/reservations_list.dart';
 import 'package:projetmobilev2/welcome_screen.dart';
 import 'package:projetmobilev2/widgets/HomeAppBar.dart';
 import 'package:projetmobilev2/widgets/HomeBottomBar.dart';

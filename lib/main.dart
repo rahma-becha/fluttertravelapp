@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:projetmobilev2/firebase_options.dart';
 import 'package:projetmobilev2/welcome_screen.dart';
-import 'package:faker/faker.dart';
 
 Future main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
