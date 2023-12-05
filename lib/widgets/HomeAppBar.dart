@@ -65,7 +65,7 @@ class HomeAppBar extends StatelessWidget {
                              padding: EdgeInsets.zero,
                              margin: EdgeInsets.zero,
                              width: double.infinity,
-                             height: 150,
+                             height: 145,
                              child:  Column(
                                children: [
                                  InkWell(
@@ -118,12 +118,10 @@ class HomeAppBar extends StatelessWidget {
                          ],
                        ),
                        actions: [
-                         IconButton(
-                           onPressed: () {
-                             Navigator.of(context).pop();
-                           },
-                           icon: const Icon(Icons.close),
-                         ),
+                         TextButton(onPressed:  () {
+                       Navigator.of(context).pop();
+                     }, child: Text("Fermer"))
+
                        ],
                      );
                    });

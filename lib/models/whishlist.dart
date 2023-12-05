@@ -1,9 +1,9 @@
 import 'package:projetmobilev2/models/Destination.dart';
-import 'package:projetmobilev2/models/User.dart';
+import 'package:projetmobilev2/models/Client.dart';
 
 class WhishList {
   String id;
-  User user;
+  Client client;
   Destination destination;
-  WhishList({required this.id, required this.user, required this.destination});
+  WhishList({required this.id, required this.client, required this.destination});
 }

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projetmobilev2/data/user.dart';
-import 'package:projetmobilev2/models/User.dart';
+import 'package:projetmobilev2/models/Client.dart';
 import 'package:projetmobilev2/pages/compteForm.dart';
-import 'package:projetmobilev2/services/userService.dart';
+import 'package:projetmobilev2/services/clientService.dart';
 import 'package:projetmobilev2/widgets/HomeBottomBar.dart';
 import '../widgets/HomeAppBar.dart';
 
@@ -23,7 +22,7 @@ class _CompteState extends State<Compte> {
         child: HomeAppBar(title: "Informations Personnelle"),
       ),
       body:Padding(
-        padding: EdgeInsets.symmetric(vertical: 30),
+          padding: EdgeInsets.symmetric(vertical: 10),
         child: SingleChildScrollView(
           child: CompteForm()
         ),

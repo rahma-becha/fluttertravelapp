@@ -43,7 +43,7 @@ class _ViewAllState extends State<ViewAll> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 30),
+            padding: EdgeInsets.symmetric(vertical: 10),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -108,6 +108,15 @@ class _ViewAllState extends State<ViewAll> {
                                 child: IconButton(
                                   onPressed: () {
                                     addToWhilslist(destinations[index].id);
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                      content: Text("Destination est ajouté dans le whishlist",style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,fontWeight: FontWeight.bold
+                                      ),),
+                                      backgroundColor: Colors.white,
+
+                                    ))
+                                    ;
                                   },
                                   iconSize: 20,
                                   icon: const Icon(Icons.favorite_outline,size: 30,),
@@ -159,7 +168,7 @@ class _ViewAllState extends State<ViewAll> {
                                                       fontSize: 20,
                                                       color: Colors.black54,
                                                     ),
-                                                    text: "/ Person")
+                                                    text: "/ Personne")
                                               ]),
                                         )
                                       ],

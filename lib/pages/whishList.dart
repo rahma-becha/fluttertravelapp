@@ -80,6 +80,15 @@ class _WhishlistState extends State<Whishlist> {
                                 child: IconButton(
                                   onPressed: () {
                                     delete(whishlists[index].id);
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                      content: Text("Destination est supprié du whishlist",style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,fontWeight: FontWeight.bold
+                                      ),),
+                                      backgroundColor: Colors.white,
+
+                                    ))
+                                    ;
                                   },
                                   iconSize: 20,
                                   icon: const Icon(Icons.favorite,size: 30,color: Colors.redAccent,),

@@ -84,7 +84,7 @@ class _RecommandationState extends State<Recommandation> {
                             Text(
                               destinations[index].rating.toString(),
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 16,
                               ),
                             )
                           ],

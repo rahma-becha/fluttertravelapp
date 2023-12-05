@@ -20,7 +20,7 @@ class _AddReservationState extends State<AddReservation> {
         child: HomeAppBar(title: "Réserver"),
       ),
       body:Padding(
-        padding: EdgeInsets.symmetric(vertical: 30),
+        padding: EdgeInsets.symmetric(vertical: 10),
         child: SingleChildScrollView(
             child: ReservationForm(destination: widget.destination,)
         ),

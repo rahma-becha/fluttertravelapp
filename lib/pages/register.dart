@@ -1,5 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:projetmobilev2/home_page.dart';
+import 'package:projetmobilev2/models/Client.dart';
+import 'package:projetmobilev2/services/clientService.dart';
+import 'package:projetmobilev2/welcome_screen.dart';
 class Register extends StatefulWidget {
   const Register({super.key});
 
@@ -14,6 +18,7 @@ class _RegisterState extends State<Register> {
   TextEditingController tel=new TextEditingController();
   TextEditingController mdp=new TextEditingController();
   TextEditingController cmdp=new TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose(){
@@ -25,26 +30,25 @@ class _RegisterState extends State<Register> {
     cmdp.dispose();
     super.dispose();
   }
-  String? get _errorText {
-    // at any time, we can get the text from _controller.value.text
-    final text = email.value.text;
-    // Note: you can do your own custom validation here
-    // Move this logic this outside the widget for more testable code
-    if (text.isEmpty) {
-      return 'Can\'t be empty';
-    }
-    if (text.length < 4) {
-      return 'Too short';
-    }
-    // return null if the text is valid
-    return null;
+
+  registerClient(){
+    Client client =new Client(
+        id: "id",
+        nom: nom.text,
+        prenom: prenom.text,
+        email: email.text,
+        tel: tel.text,
+        mdp: mdp.text,
+        photo: "assets/person1.jpg"
+    );
+    ClientService().register(client);
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body:SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 30),
+              padding: EdgeInsets.symmetric(vertical: 10),
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -62,7 +66,7 @@ class _RegisterState extends State<Register> {
                       ),
                     ),
                     child: Form(
-                     // key: _formKey,
+                      key: _formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -78,6 +82,12 @@ class _RegisterState extends State<Register> {
                           ),
                           TextFormField(
                             controller: nom,
+                            validator: (value){
+                              if(value!.isEmpty==true){
+                                return "le champ nom est obligatoire";
+                              }
+                              return null;
+                            },
                             decoration: InputDecoration(
                               label: const Text('Nom',style: TextStyle(color: Colors.black),),
                               hintText: 'Entrer Nom',
@@ -110,6 +120,12 @@ class _RegisterState extends State<Register> {
 
                           TextFormField(
                             controller: prenom,
+                            validator: (value){
+                              if(value!.isEmpty==true){
+                                return "le champ prenom est obligatoire";
+                              }
+                              return null;
+                            },
                             decoration: InputDecoration(
                               label: const Text('Prénom',style: TextStyle(color: Colors.black),),
                               hintText: 'Entrer Prénom',
@@ -140,6 +156,15 @@ class _RegisterState extends State<Register> {
                           ),
                           TextFormField(
                             controller: email,
+                            validator: (value){
+                              if(value!.isEmpty==true){
+                                return "le champ email est obligatoire";
+                              }
+                              if(!value.contains("@")){
+                                return "le champ email doit contenir le caractére @";
+                              }
+                              return null;
+                            },
                             decoration: InputDecoration(
                               label: const Text('Email',style: TextStyle(color: Colors.black),),
                               hintText: 'Entrer Email',
@@ -170,6 +195,15 @@ class _RegisterState extends State<Register> {
                           ),
                           TextFormField(
                             controller: tel,
+                            validator: (value){
+                              if(value!.isEmpty==true){
+                                return "le champ tel est obligatoire";
+                              }
+                              if(value.length<0 || value.length>8){
+                                return "le champ tel doit contenir 8 caracteres";
+                              }
+                              return null;
+                            },
                             decoration: InputDecoration(
                               label: const Text('Téléphone',style: TextStyle(color: Colors.black),),
                               hintText: 'Entrer Téléphone',
@@ -201,6 +235,15 @@ class _RegisterState extends State<Register> {
                           ),
                           TextFormField(
                             controller: mdp,
+                            validator: (value){
+                              if(value!.isEmpty==true){
+                                return "le champ mot de passe  est obligatoire";
+                              }
+                              if(value.length<8){
+                                return "le champ mot de passe doit contenir au moins 8 caractéres";
+                              }
+                              return null;
+                            },
                             obscureText: true,
                             decoration: InputDecoration(
                               label: const Text('Mot de Passe',style: TextStyle(color: Colors.black),),
@@ -232,6 +275,15 @@ class _RegisterState extends State<Register> {
                           ),
                           TextFormField(
                             controller: cmdp,
+                            validator: (value){
+                              if(value!.isEmpty==true){
+                                return "le champ confirmer mot de passe  est obligatoire";
+                              }
+                              if(value!=mdp.text){
+                                return "le champ confirmer mot de passe doit être egale au champ mot de passe";
+                              }
+                              return null;
+                            },
                             obscureText: true,
                             decoration: InputDecoration(
                               label: const Text('Confirmer Mot de Passe',style: TextStyle(color: Colors.black),),
@@ -266,11 +318,19 @@ class _RegisterState extends State<Register> {
                             width: double.infinity,
                             child:             ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>HomePage()
-                                    ));
+                                bool? val=_formKey.currentState?.validate();
+                                  if(val.toString()=="true"){
+                                    registerClient();
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>WelcomeScreen()
+                                        ));
+                                  }
+
+
+
+
 
                               },
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:projetmobilev2/data/user.dart';
 import 'package:projetmobilev2/models/Destination.dart';
 import 'package:projetmobilev2/models/hotel.dart';
 import 'package:projetmobilev2/models/reservation.dart';
+import 'package:projetmobilev2/pages/reservations_list.dart';
 import 'package:projetmobilev2/services/hotelService.dart';
 import 'package:projetmobilev2/services/reservationService.dart';
 
@@ -14,18 +14,24 @@ class ChoixHotel extends StatefulWidget {
       {super.key,
       required this.destination,
       required this.date,
-      required this.nbrPersonne});
+      required this.nbrPersonne,
+      required this.nbrJour});
   final Destination destination;
   final String date;
   final String nbrPersonne;
-
+  final String nbrJour;
   @override
   State<ChoixHotel> createState() => _ChoixHotelState();
 }
 
 class _ChoixHotelState extends State<ChoixHotel> {
-  addReservation(Reservation r){
-    ReservationService().addReservation(r);
+  addReservation(String date, String nbrPersonne,String nbrJour,Destination d,Hotel h){
+    ReservationService().addReservation(date,int.parse(nbrPersonne),int.parse(nbrJour),d,h);
+  }
+  showPrix(Destination d,String nbrPersoone,String nbrJour,Hotel h){
+    int nbrp=int.parse(nbrPersoone);
+    int nbrj=int.parse(nbrJour);
+    return (((d.prix*nbrp)+(h.prixParNuit*nbrp))*nbrj).toString();
   }
   @override
   Widget build(BuildContext context) {
@@ -64,10 +70,7 @@ class _ChoixHotelState extends State<ChoixHotel> {
                           child: InkWell(
                             borderRadius: BorderRadius.circular(12),
                             onTap: () {
-                               Reservation r =new Reservation(id: "id",
-                                   date: widget.date,
-                                   nbrPersonne: int.parse(widget.nbrPersonne),
-                                   destination: widget.destination, hotel: hotels[index], user: user);
+
     showDialog(context: context, builder: (BuildContext context) {
                                return  AlertDialog(
                                    title: Text("Confirmer Réservation"),
@@ -75,15 +78,18 @@ class _ChoixHotelState extends State<ChoixHotel> {
                                      padding: EdgeInsets.zero,
                                      margin: EdgeInsets.zero,
                                      width: double.infinity,
-                                     height: 95,
+                                     height: 115,
                                      child: Column(
                                        children: [
                                          Text("Destination : " +
-                                             r.destination.name),
-                                         Text("Date : " + r.date),
+                                             widget.destination.name),
+                                         Text("Date : " + widget.date),
                                          Text("Nombre de personne : " +
-                                             r.nbrPersonne.toString()),
-                                         Text("Hotel : " + r.hotel.name),
+                                             widget.nbrPersonne),
+                                         Text("Nombre de jour : " +
+                                             widget.nbrJour),
+                                         Text("Hotel : " + hotels[index].name),
+                                         Text("Prix :"+showPrix(widget.destination,widget.nbrPersonne,widget.nbrJour,hotels[index])+" TND")
                                        ],
                                      ),
                                    ),
@@ -96,8 +102,19 @@ class _ChoixHotelState extends State<ChoixHotel> {
                                      ),
                                      TextButton(
                                        onPressed: () {
-                                         addReservation(r);
-                                         Navigator.pop(context);
+
+                                         addReservation(widget.date, widget.nbrPersonne,widget.nbrJour, widget.destination, hotels[index]);
+                                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                           content: Text("Réservation ajouté avec success",style: TextStyle(
+                                               color: Colors.black,
+                                               fontSize: 16,fontWeight: FontWeight.bold
+                                           ),),
+                                           backgroundColor: Colors.white,
+
+                                         ))
+                                         ;
+                                         Navigator.push(context, MaterialPageRoute(builder: (context)=>Reservations()));
+
                                        },
                                        child: const Text('Confirmer'),
                                      ),
@@ -166,7 +183,7 @@ class _ChoixHotelState extends State<ChoixHotel> {
                                                           fontSize: 20,
                                                           color: Colors.black54,
                                                         ),
-                                                        text: "/ Person")
+                                                        text: "/ Personne")
                                                   ]),
                                             )
                                           ],

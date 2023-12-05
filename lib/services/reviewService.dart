@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projetmobilev2/models/Review.dart';
 
 import '../models/Destination.dart';
-import '../models/User.dart';
+import '../models/Client.dart';
 
 class ReviewService {
   Future<List<Review>> getReviewByDestination(String destination_id) async {
@@ -28,10 +28,10 @@ class ReviewService {
         reviews: []);
     for (final DocumentSnapshot reviewDocument in reviewsSnapshot.docs) {
       final userSnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(reviewDocument.get("user"))
+          .collection('clients')
+          .doc(reviewDocument.get("client"))
           .get();
-      User user = new User(
+      Client client = new Client(
           id: userSnapshot.id,
           nom: userSnapshot.get("nom"),
           prenom: userSnapshot.get("prenom"),
@@ -43,7 +43,7 @@ class ReviewService {
           id: reviewDocument.id,
           review: reviewDocument.get("review"),
           rating: reviewDocument.get("rating"),
-          user: user,
+          client: client,
           destination: destination);
       reviews.add(review);
     }

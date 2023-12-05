@@ -4,7 +4,7 @@ import 'package:projetmobilev2/pages/choix_hotel.dart';
 import 'package:projetmobilev2/services/hotelService.dart';
 
 import '../models/Destination.dart';
-import '../models/User.dart';
+import '../models/Client.dart';
 
 class ReservationForm extends StatefulWidget {
   const ReservationForm({super.key, required this.destination});
@@ -17,7 +17,7 @@ class _ReservationFormState extends State<ReservationForm> {
   TextEditingController date = new TextEditingController();
   TextEditingController nbrPersone = new TextEditingController();
   TextEditingController name = new TextEditingController();
-
+  TextEditingController nbrJour=new TextEditingController();
   @override
   void dispose() {
     // TODO: implement dispose
@@ -139,6 +139,43 @@ class _ReservationFormState extends State<ReservationForm> {
                         height: 25.0,
                       ),
                       TextFormField(
+                        controller: nbrJour,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          label: const Text(
+                            'Nombre du jours',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          hintText: 'Entrer Nombre du jours',
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black),
+                          ),
+                          hoverColor: Color(0xFFF65959),
+                          prefixIcon: Icon(
+                            Icons.numbers_outlined,
+                            color: Colors.black,
+                          ),
+                          hintStyle: const TextStyle(
+                            color: Colors.black26,
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Colors.black, // Default border color
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Colors.black, // Default border color
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 25.0,
+                      ),
+                      TextFormField(
                         controller: nbrPersone,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
@@ -146,7 +183,7 @@ class _ReservationFormState extends State<ReservationForm> {
                             'Nombre de personne',
                             style: TextStyle(color: Colors.black),
                           ),
-                          hintText: 'Entrer Prénom',
+                          hintText: 'Entrer Nombre de personne',
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black),
                           ),
@@ -181,7 +218,7 @@ class _ReservationFormState extends State<ReservationForm> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ChoixHotel(destination:widget.destination , date: date.text,nbrPersonne: nbrPersone.text,)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ChoixHotel(destination:widget.destination , date: date.text,nbrPersonne: nbrPersone.text,nbrJour: nbrJour.text,)));
 
                           },
                           style: ElevatedButton.styleFrom(

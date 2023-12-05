@@ -109,6 +109,15 @@ class _DetailsPageState extends State<DetailsPage> {
                   child: IconButton(
                     onPressed: () {
                       addToWhilslist(widget.destination.id);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("Destination est ajouté dans le whishlist",style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,fontWeight: FontWeight.bold
+                        ),),
+                        backgroundColor: Colors.white,
+
+                      ))
+                      ;
                     },
                     iconSize: 20,
                     icon: const Icon(Icons.favorite_outline,size: 30,),
@@ -185,7 +194,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   horizontal: 8.0,
                 ),
               ),
-              child: const Text("Réserver",style: TextStyle(
+              child: const Text("Réserver ",style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.w600

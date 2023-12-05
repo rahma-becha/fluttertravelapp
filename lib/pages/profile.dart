@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:projetmobilev2/pages/compte.dart';
 import 'package:projetmobilev2/pages/reservations_list.dart';
+import 'package:projetmobilev2/services/authService.dart';
 import 'package:projetmobilev2/welcome_screen.dart';
 import 'package:projetmobilev2/widgets/HomeAppBar.dart';
 import 'package:projetmobilev2/widgets/HomeBottomBar.dart';
@@ -13,6 +15,14 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  Future<void> sign_out()async{
+    try{
+      AuthService().sign_out();
+    } on FirebaseAuthException catch(e){
+      print(e.message);
+      }
+    }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +31,7 @@ class _ProfileState extends State<Profile> {
         child:HomeAppBar(title: "Profile"),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 20),
+        padding: EdgeInsets.symmetric(vertical: 10),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -169,6 +179,7 @@ class _ProfileState extends State<Profile> {
                     const Spacer(),
                     InkWell(
                       onTap: (){
+                        sign_out();
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>WelcomeScreen()));
 
                       },

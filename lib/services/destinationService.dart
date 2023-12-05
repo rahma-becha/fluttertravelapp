@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projetmobilev2/models/Destination.dart';
 import 'package:projetmobilev2/models/Review.dart';
 
-import '../models/User.dart';
+import '../models/Client.dart';
 
 class DestinationService {
   Future<List<Destination>> getAllDestinations() async {

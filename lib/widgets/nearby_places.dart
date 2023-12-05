@@ -135,7 +135,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                                               fontSize: 20,
                                               color: Colors.black54,
                                             ),
-                                            text: "/ Person")
+                                            text: "/ Personne")
                                       ]),
                                 )
                               ],

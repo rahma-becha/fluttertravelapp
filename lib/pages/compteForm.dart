@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projetmobilev2/data/user.dart';
 
-import '../models/User.dart';
-import '../services/userService.dart';
+import '../models/Client.dart';
+import '../services/clientService.dart';
 class CompteForm extends StatefulWidget {
   const CompteForm({super.key});
 
@@ -11,7 +10,7 @@ class CompteForm extends StatefulWidget {
 }
 
 class _CompteFormState extends State<CompteForm> {
-  Future<User> futureUser=UserService().getUserInfo();
+  Future<Client> futureUser=ClientService().getUserInfo();
   TextEditingController nom=new TextEditingController();
   TextEditingController prenom=new TextEditingController();
   TextEditingController email=new TextEditingController();
@@ -30,19 +29,19 @@ class _CompteFormState extends State<CompteForm> {
     super.dispose();
   }
   upadteUser(){
-    User userupdate=new User(
-        id: user.id,
+    Client userupdate=new Client(
+        id: "user.id",
         nom: nom.text,
         prenom: prenom.text,
         email: email.text,
         tel: tel.text,
         mdp: mdp.text,
         photo: "assets/person1.png");
-    UserService().updateUser(userupdate);
+    ClientService().updateUser(userupdate);
   }
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<User>(
+    return FutureBuilder<Client>(
         future: futureUser,
         builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
@@ -280,6 +279,15 @@ class _CompteFormState extends State<CompteForm> {
                   child:             ElevatedButton(
                     onPressed: () {
                        upadteUser();
+                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                         content: Text("modifications est effectuée avec success",style: TextStyle(
+                             color: Colors.black,
+                             fontSize: 16,fontWeight: FontWeight.bold
+                         ),),
+                         backgroundColor: Colors.white,
+
+                       ))
+                       ;
                     },
 
                     style: ElevatedButton.styleFrom(

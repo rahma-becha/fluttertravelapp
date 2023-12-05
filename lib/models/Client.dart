@@ -1,4 +1,4 @@
-class User{
+class Client{
   String id;
   String nom;
   String prenom;
@@ -6,7 +6,7 @@ class User{
   String email;
   String mdp;
   String photo;
-  User({
+  Client({
     required this.id,
     required this.nom,
     required this.prenom,

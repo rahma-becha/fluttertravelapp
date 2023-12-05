@@ -63,14 +63,14 @@ class _ReviewsState extends State<Reviews> {
                         leading: ClipRRect(
                           borderRadius: BorderRadius.circular(50),
                           child: Image.asset(
-                            reviews[index].user.photo,
+                            reviews[index].client.photo,
                             fit: BoxFit.cover,
                           ),
                         ),
                         title: Row(
                           children: [
                             Text(
-                              reviews[index].user.nom+" "+reviews[index].user.prenom,
+                              reviews[index].client.nom+" "+reviews[index].client.prenom,
                               style: TextStyle(
                                   fontWeight: FontWeight.w500, fontSize: 20),
                               textAlign: TextAlign.start,

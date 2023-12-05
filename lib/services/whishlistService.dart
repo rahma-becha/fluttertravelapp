@@ -1,13 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:projetmobilev2/data/user.dart';
 import 'package:projetmobilev2/models/Destination.dart';
-import 'package:projetmobilev2/models/User.dart';
+import 'package:projetmobilev2/models/Client.dart';
 import 'package:projetmobilev2/models/whishlist.dart';
+
+import 'authService.dart';
 
 class WhishListService {
   Future<List<WhishList>> getAllWhishList() async {
-    final whishlistRef = FirebaseFirestore.instance.collection('wishlists');
-    final querySnapshot = await whishlistRef.get();
+    final userDocument = await FirebaseFirestore.instance
+        .collection("clients")
+        .where("email",isEqualTo: AuthService().currentUser?.email)
+        .get();
+    Client user = new Client(
+        id: userDocument.docs[0].id,
+        nom: userDocument.docs[0].get("nom"),
+        prenom: userDocument.docs[0].get("prenom"),
+        email: userDocument.docs[0].get("email"),
+        tel: userDocument.docs[0].get("tel"),
+        mdp: userDocument.docs[0].get("mdp"),
+        photo: userDocument.docs[0].get("photo"));
+    final querySnapshot = await FirebaseFirestore.instance.collection('wishlists').orderBy(FieldPath.documentId,descending: true).where("client",isEqualTo: user.id).get();
     final List<WhishList> whishlist = [];
     for (final whishlistDoc in querySnapshot.docs) {
 
@@ -25,19 +37,10 @@ class WhishListService {
           prix: destinationSnapshot.get("prix"),
           reviews: []);
 
-      final userSnapshot = await FirebaseFirestore.instance.collection('users').doc(whishlistDoc.get("user")).get();
 
-      User user = new User(
-          id: userSnapshot.id,
-          nom: userSnapshot.get("nom"),
-          prenom: userSnapshot.get("prenom"),
-          email: userSnapshot.get("email"),
-          tel: userSnapshot.get("tel"),
-          mdp: userSnapshot.get("mdp"),
-          photo: userSnapshot.get("photo"));
 
       WhishList w = new WhishList(
-          id: whishlistDoc.id, user: user, destination: destination);
+          id: whishlistDoc.id, client: user, destination: destination);
       whishlist.add(w);
     }
     return whishlist;
@@ -52,9 +55,21 @@ class WhishListService {
   }
 
   void addToWhishList(String destination_id) async {
+    final userDocument = await FirebaseFirestore.instance
+        .collection("clients")
+        .where("email",isEqualTo: AuthService().currentUser?.email)
+        .get();
+    Client user = new Client(
+        id: userDocument.docs[0].id,
+        nom: userDocument.docs[0].get("nom"),
+        prenom: userDocument.docs[0].get("prenom"),
+        email: userDocument.docs[0].get("email"),
+        tel: userDocument.docs[0].get("tel"),
+        mdp: userDocument.docs[0].get("mdp"),
+        photo: userDocument.docs[0].get("photo"));
     Map<String, dynamic> data = {
       'destination': destination_id,
-      'user':user.id,
+      'client':user.id,
     };
     await FirebaseFirestore.instance
         .collection('wishlists')

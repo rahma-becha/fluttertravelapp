@@ -26,7 +26,7 @@ class _WhishListPageState extends State<WhishListPage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 30),
+            padding: EdgeInsets.symmetric(vertical: 10),
           child: SingleChildScrollView(
             child: Column(
               children: [
