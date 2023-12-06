@@ -22,7 +22,7 @@ class _WhishListPageState extends State<WhishListPage> {
     return  Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(90.0),
-        child:HomeAppBar(title: "Favorites"),
+        child:HomeAppBar(title: "Wishlist"),
       ),
       body: SafeArea(
         child: Padding(

@@ -22,6 +22,9 @@ class _DetailsPageState extends State<DetailsPage> {
   addToWhilslist(String destination_id){
     WhishListService().addToWhishList(destination_id);
   }
+  showPrix(Destination d){
+    return d.prix.toString()+" TND/Personne";
+  }
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -187,14 +190,14 @@ class _DetailsPageState extends State<DetailsPage> {
 
               style: ElevatedButton.styleFrom(
                 elevation: 0,
-                backgroundColor: Color(0xFFF65959),
+                backgroundColor: Color(0xFFE65100),
                 shape: const StadiumBorder(),
                 padding: const EdgeInsets.symmetric(
                   vertical: 15,
                   horizontal: 8.0,
                 ),
               ),
-              child: const Text("Réserver ",style: TextStyle(
+              child:  Text("Réserver "+showPrix(widget.destination),style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.w600

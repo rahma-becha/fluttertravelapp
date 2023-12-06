@@ -39,7 +39,7 @@ class _ChoixHotelState extends State<ChoixHotel> {
         future: HotelService().getHotelsByDestination(widget.destination),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator(color: Colors.black,));
           }
 
           if (snapshot.hasError) {
@@ -174,7 +174,7 @@ class _ChoixHotelState extends State<ChoixHotel> {
                                               text: TextSpan(
                                                   style: TextStyle(
                                                     fontSize: 20,
-                                                    color: Color(0xFFF65959),
+                                                    color: Color(0xFFE65100),
                                                   ),
                                                   text: hotels[index].prixParNuit.toString()+" TND",
                                                   children: const [

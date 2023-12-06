@@ -24,10 +24,10 @@ class _HomeBottomBarState extends State<HomeBottomBar> {
         backgroundColor: Colors.transparent,
         index: int.parse(widget.selectedIndex),
         items:[
-          Icon(Icons.home,size: 30,color: Colors.redAccent,),
-          Icon(Icons.search_outlined,size: 30,),
-          Icon(Icons.favorite_outline,size: 30,),
-          Icon(Icons.person_outline,size: 30,)
+          Icon(Icons.home,size: 30,color: Color(0xFFE65100),),
+          Icon(Icons.search_outlined,size: 30,color:  _selectedIndex == 1 ? Color(0xFFE65100) : Colors.black,),
+          Icon(Icons.favorite_outline,size: 30,color:  _selectedIndex == 2 ? Color(0xFFE65100) : Colors.black,),
+          Icon(Icons.person_outline,size: 30,color:  _selectedIndex == 3 ? Color(0xFFE65100) : Colors.black,)
 
     ],
       onTap: (index){

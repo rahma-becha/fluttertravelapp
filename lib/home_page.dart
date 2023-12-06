@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
                      Padding(padding: EdgeInsets.all(10),
                        child:Container(
                          alignment: Alignment.topLeft,
-                         child:  Text("Nouvelles",
+                         child:  Text("Recommandations",
                            style: TextStyle(
                                fontWeight: FontWeight.bold,
                                fontSize: 20
@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
                            MaterialPageRoute(
                              builder: (context) =>ViewAll(title: "Recommandations",)
                            ));
-                     }, child: Text('Voir Plus',style: TextStyle(color: Colors.redAccent,fontSize: 18),))
+                     }, child: Text('Voir Plus',style: TextStyle(color: Color(0xFFE65100),fontSize: 18),))
 
                    ],
                  ),
@@ -62,7 +62,7 @@ class HomePage extends StatelessWidget {
                      Padding(padding: EdgeInsets.all(10),
                        child:Container(
                          alignment: Alignment.topLeft,
-                         child:  Text("Most Visited",
+                         child:  Text("Destinations",
                            style: TextStyle(
                                fontWeight: FontWeight.bold,
                                fontSize: 20
@@ -72,9 +72,9 @@ class HomePage extends StatelessWidget {
                        Navigator.push(
                            context,
                            MaterialPageRoute(
-                               builder: (context) =>ViewAll(title: "Nearby Places",)
+                               builder: (context) =>ViewAll(title: "Destinations",)
                            ));
-                     }, child: Text('Voir Plus',style: TextStyle(color: Colors.redAccent,fontSize: 18),))
+                     }, child: Text('Voir Plus',style: TextStyle(color: Color(0xFFE65100),fontSize: 18),))
 
                    ],
                  ),

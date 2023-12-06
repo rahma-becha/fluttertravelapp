@@ -39,7 +39,7 @@ class _ProfileState extends State<Profile> {
         ClipRRect(
                 borderRadius: BorderRadius.circular(50),
                 child: Image.asset(
-                  "assets/person1.png",
+                  "assets/person2.png",
                   fit: BoxFit.cover,
                 ),
               ),

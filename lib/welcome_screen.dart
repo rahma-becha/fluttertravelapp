@@ -42,30 +42,26 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 10),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Image(
-                image: AssetImage("assets/illustration.png"),
-                height: 180,
-              ),
               Container(
-                padding: const EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 20.0),
+                padding: const EdgeInsets.only(left: 25,right: 25),
                 height: MediaQuery.of(context).size.height * 1.4,
                 decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40.0),
-                    topRight: Radius.circular(40.0),
-                  ),
                 ),
                 child: Form(
                   key: _formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      Image(
+                        image: AssetImage("assets/logo.png"),
+                        width: 270,
+                        height: 270,
+                      ),
+
                       Text(
                         'Connexion',
                         style: TextStyle(
@@ -74,8 +70,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 40.0,
+                        height: 10.0,
                       ),
+
                       Text(
                         error_message,
                         style: TextStyle(
@@ -105,7 +102,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black),
                           ),
-                          hoverColor: Color(0xFFF65959),
+                          hoverColor: Color(0xFFE65100),
                           prefixIcon: Icon(
                             Icons.email_outlined,
                             color: Colors.black,
@@ -153,7 +150,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black),
                           ),
-                          hoverColor: Color(0xFFF65959),
+                          hoverColor: Color(0xFFE65100),
                           prefixIcon: Icon(
                             Icons.password_outlined,
                             color: Colors.black,
@@ -210,7 +207,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
-                            backgroundColor: Color(0xFFF65959),
+                            backgroundColor: Color(0xFFE65100),
                             shape: const StadiumBorder(),
                             padding: const EdgeInsets.symmetric(
                               vertical: 15,
@@ -244,7 +241,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               horizontal: 10,
                             ),
                             child: Text(
-                              'Sign up with',
+                              'Se connecter avec',
                               style: TextStyle(
                                 color: Colors.black45,
                               ),
@@ -287,7 +284,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Text(
-                            'Don\'t have an account? ',
+                            'Vous n\'avez pas de compte ? ',
                             style: TextStyle(
                               color: Colors.black45,
                             ),
@@ -302,7 +299,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               );
                             },
                             child: Text(
-                              'Sign up',
+                              'S\'inscrire',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 //   color: lightColorScheme.primary,
@@ -321,7 +318,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ],
           ),
         ),
-      ),
+
     ));
   }
 }

@@ -27,7 +27,7 @@ class _ReviewsState extends State<Reviews> {
         future: ReviewService().getReviewByDestination(widget.destination_id),
         builder: (context, snapshot){
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return const Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator(color: Colors.black,));
       }
 
       if (snapshot.hasError) {

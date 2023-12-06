@@ -6,9 +6,13 @@ class LocationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(10),
-        child:  Image.asset(
-          'assets/travel-promo.png',
-        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+
+          child: Image.asset(
+            'assets/travel-promo.png',
+          ),
+      ),
       );
   }
 }

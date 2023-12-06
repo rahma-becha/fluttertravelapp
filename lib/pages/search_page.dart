@@ -3,6 +3,7 @@ import 'package:projetmobilev2/pages/details_page.dart';
 import 'package:projetmobilev2/widgets/HomeBottomBar.dart';
 
 import '../models/Destination.dart';
+import '../services/destinationService.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
@@ -12,9 +13,8 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
-  List<Destination> dataList = [
-    new Destination(id: "id", name: "name", lat: 34.12, long: 10.12, location: "location", description: "description", photo: "photo", rating: 4.6, prix: 55, reviews: [])
-  ];
+  List<Destination> destinations = [];
+  Future<List<Destination>> futureDestinations=DestinationService().getAllDestinations();
 
 
   List _founded = [];
@@ -28,13 +28,23 @@ class _SearchViewState extends State<SearchView> {
 
   onSearch(String search) {
     setState(() {
-      _founded= dataList.where((loc) => loc.name.contains(search)).toList();
+      _founded= destinations.where((loc) => loc.name.contains(search)).toList();
     });
   }
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    return FutureBuilder<List<Destination>>(
+        future: futureDestinations,
+        builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(child: CircularProgressIndicator(color: Colors.black,));
+      }
 
+      if (snapshot.hasError) {
+        return Center(child: Text('Error: ${snapshot.error}'));
+      }
+
+       destinations = snapshot.data!;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -85,10 +95,7 @@ class _SearchViewState extends State<SearchView> {
                                  child: Image.asset(_founded[index].photo, fit: BoxFit.cover , width:50,),
                                ),
                              ),
-                             trailing:IconButton(
-                               onPressed: (){},
-                               icon: Icon(Icons.close),
-                             ),
+
                              title: Text(_founded[index].name)),
                        )
                      );
@@ -99,7 +106,7 @@ class _SearchViewState extends State<SearchView> {
         ),
       ),
       bottomNavigationBar: HomeBottomBar(selectedIndex: "1",),
-    );
+    );});
   }
 }
 

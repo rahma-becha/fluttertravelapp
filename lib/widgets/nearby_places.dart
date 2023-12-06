@@ -29,7 +29,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
         future: futureDestinations,
         builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return const Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator(color: Colors.black,));
       }
 
       if (snapshot.hasError) {
@@ -88,7 +88,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                               children: [
                                 Icon(
                                   Icons.location_on,
-                                  color: Color(0xFFF65959),
+                                  color: Color(0xFFE65100),
                                   size: 18,
                                 ),
                                 const SizedBox(width: 5),
@@ -126,7 +126,7 @@ class _NearbyPlacesState extends State<NearbyPlaces> {
                                   text: TextSpan(
                                       style: TextStyle(
                                         fontSize: 20,
-                                        color: Color(0xFFF65959),
+                                        color: Color(0xFFE65100),
                                       ),
                                       text: destinations[index].prix.toString()+" TND",
                                       children: const [

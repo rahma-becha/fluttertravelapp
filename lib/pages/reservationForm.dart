@@ -18,6 +18,8 @@ class _ReservationFormState extends State<ReservationForm> {
   TextEditingController nbrPersone = new TextEditingController();
   TextEditingController name = new TextEditingController();
   TextEditingController nbrJour=new TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -43,7 +45,7 @@ class _ReservationFormState extends State<ReservationForm> {
                   ),
                 ),
                 child: Form(
-                  //key: _formSignInKey,
+                  key: _formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -72,6 +74,7 @@ class _ReservationFormState extends State<ReservationForm> {
                       TextFormField(
                         readOnly: true,
                         controller: name,
+
                         decoration: InputDecoration(
                           label: const Text(
                             'Nom du destination',
@@ -80,7 +83,7 @@ class _ReservationFormState extends State<ReservationForm> {
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black),
                           ),
-                          hoverColor: Color(0xFFF65959),
+                          hoverColor: Color(0xFFE65100),
                           hintStyle: const TextStyle(
                             color: Colors.black26,
                           ),
@@ -104,6 +107,13 @@ class _ReservationFormState extends State<ReservationForm> {
                       TextFormField(
                         controller: date,
                         keyboardType: TextInputType.datetime,
+                        validator: (value){
+                          if (value!.isEmpty == true) {
+                            return "le champ date de réservation est obligatoire";
+                          }
+
+                          return null;
+                        },
                         decoration: InputDecoration(
                           label: const Text(
                             'Date de réservation',
@@ -113,7 +123,7 @@ class _ReservationFormState extends State<ReservationForm> {
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black),
                           ),
-                          hoverColor: Color(0xFFF65959),
+                          hoverColor: Color(0xFFE65100),
                           prefixIcon: Icon(
                             Icons.calendar_today,
                             color: Colors.black,
@@ -141,6 +151,13 @@ class _ReservationFormState extends State<ReservationForm> {
                       TextFormField(
                         controller: nbrJour,
                         keyboardType: TextInputType.number,
+                        validator: (value){
+                          if (value!.isEmpty == true) {
+                            return "le champ nombre du jours est obligatoire";
+                          }
+
+                          return null;
+                        },
                         decoration: InputDecoration(
                           label: const Text(
                             'Nombre du jours',
@@ -150,7 +167,7 @@ class _ReservationFormState extends State<ReservationForm> {
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black),
                           ),
-                          hoverColor: Color(0xFFF65959),
+                          hoverColor: Color(0xFFE65100),
                           prefixIcon: Icon(
                             Icons.numbers_outlined,
                             color: Colors.black,
@@ -178,6 +195,13 @@ class _ReservationFormState extends State<ReservationForm> {
                       TextFormField(
                         controller: nbrPersone,
                         keyboardType: TextInputType.number,
+                        validator: (value){
+                          if (value!.isEmpty == true) {
+                            return "le champ nombre du personne est obligatoire";
+                          }
+
+                          return null;
+                        },
                         decoration: InputDecoration(
                           label: const Text(
                             'Nombre de personne',
@@ -187,7 +211,7 @@ class _ReservationFormState extends State<ReservationForm> {
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black),
                           ),
-                          hoverColor: Color(0xFFF65959),
+                          hoverColor: Color(0xFFE65100),
                           prefixIcon: Icon(
                             Icons.numbers_outlined,
                             color: Colors.black,
@@ -218,12 +242,16 @@ class _ReservationFormState extends State<ReservationForm> {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ChoixHotel(destination:widget.destination , date: date.text,nbrPersonne: nbrPersone.text,nbrJour: nbrJour.text,)));
+                            bool? val=_formKey.currentState?.validate();
+                            if(val.toString()=="true"){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>ChoixHotel(destination:widget.destination , date: date.text,nbrPersonne: nbrPersone.text,nbrJour: nbrJour.text,)));
+
+                            }
 
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
-                            backgroundColor: Color(0xFFF65959),
+                            backgroundColor: Color(0xFFE65100),
                             shape: const StadiumBorder(),
                             padding: const EdgeInsets.symmetric(
                               vertical: 15,

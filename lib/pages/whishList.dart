@@ -24,7 +24,7 @@ class _WhishlistState extends State<Whishlist> {
         future: futureWhishList,
         builder: (context, snapshot){
           if (snapshot.connectionState == ConnectionState.waiting) {
-        return const Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator(color: Colors.black,));
       }
 
       if (snapshot.hasError) {
@@ -138,7 +138,7 @@ class _WhishlistState extends State<Whishlist> {
                                 text: TextSpan(
                                     style: TextStyle(
                                       fontSize: 20,
-                                      color: Color(0xFFF65959),
+                                      color: Color(0xFFE65100),
                                     ),
 
                                     text: whishlists[index].destination.prix.toString()+" TND",
@@ -148,7 +148,7 @@ class _WhishlistState extends State<Whishlist> {
                                             fontSize: 20,
                                             color: Colors.black54,
                                           ),
-                                          text: "/ Person")
+                                          text: "/ Personne")
                                     ]),
                               )
                             ],

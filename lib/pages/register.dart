@@ -48,37 +48,35 @@ class _RegisterState extends State<Register> {
     return Scaffold(
         body:SafeArea(
           child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
+              padding: EdgeInsets.symmetric(vertical: 2),
             child: SingleChildScrollView(
               child: Column(
                 children: [
-
-
-                  Image(image: AssetImage("assets/illustration.png"),height: 180,),
-
                   Container(
-                    padding: const EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 20.0),
+                    padding: const EdgeInsets.only(left: 25,right: 25),
                     decoration: const BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(40.0),
-                        topRight: Radius.circular(40.0),
-                      ),
+
                     ),
                     child: Form(
                       key: _formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          Image(
+                            image: AssetImage("assets/logo.png"),
+                            width: 270,
+                            height: 270,
+                          ),
                           Text(
-                            'Inscription',
+                            'S\'inscrire',
                             style: TextStyle(
                               fontSize: 30.0,
                               fontWeight: FontWeight.w900,
                             ),
                           ),
                           const SizedBox(
-                            height: 40.0,
+                            height: 10.0,
                           ),
                           TextFormField(
                             controller: nom,
@@ -336,14 +334,14 @@ class _RegisterState extends State<Register> {
 
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
-                                backgroundColor: Color(0xFFF65959),
+                                backgroundColor: Color(0xFFE65100),
                                 shape: const StadiumBorder(),
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 15,
                                   horizontal: 8.0,
                                 ),
                               ),
-                              child: const Text("Inscription",style: TextStyle(
+                              child: const Text("S'inscrire",style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600

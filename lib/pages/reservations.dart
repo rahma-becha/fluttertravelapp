@@ -25,7 +25,7 @@ class _ReservationsViewState extends State<ReservationsView> {
         future: futureReservationList,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator(color: Colors.black,));
           }
 
           if (snapshot.hasError) {
@@ -87,7 +87,7 @@ class _ReservationsViewState extends State<ReservationsView> {
                                                     (BuildContext context) {
                                                   return AlertDialog(
                                                     title: Text(
-                                                        "Confirmer Réservation"),
+                                                        "Supprimer Réservation"),
                                                     content: Container(
                                                       padding: EdgeInsets.zero,
                                                       margin: EdgeInsets.zero,
@@ -179,7 +179,7 @@ class _ReservationsViewState extends State<ReservationsView> {
                                           text: TextSpan(
                                               style: TextStyle(
                                                 fontSize: 20,
-                                                color: Color(0xFFF65959),
+                                                color: Color(0xFFE65100),
                                               ),
                                               text: reservations[index]
                                                       .prix

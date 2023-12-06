@@ -28,7 +28,7 @@ class _ViewAllState extends State<ViewAll> {
         future: futureDestinations,
         builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return const Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator(color: Colors.black,));
       }
 
       if (snapshot.hasError) {
@@ -133,8 +133,7 @@ class _ViewAllState extends State<ViewAll> {
 
                               ),
                               SizedBox(height: 5,),
-                              Column(
-                                children: [
+
 
                                   Text(
                                     destinations[index].description.substring(0,151)+"...",
@@ -158,7 +157,7 @@ class _ViewAllState extends State<ViewAll> {
                                           text: TextSpan(
                                               style: TextStyle(
                                                 fontSize: 20,
-                                                color: Color(0xFFF65959),
+                                                color: Color(0xFFE65100),
                                               ),
 
                                               text: destinations[index].prix.toString()+" TND",
@@ -174,8 +173,7 @@ class _ViewAllState extends State<ViewAll> {
                                       ],
                                     ),)
 
-                                ],
-                              )
+
                             ],
                           ),
 

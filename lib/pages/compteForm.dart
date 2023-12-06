@@ -45,7 +45,7 @@ class _CompteFormState extends State<CompteForm> {
         future: futureUser,
         builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return const Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator(color: Colors.black,));
       }
 
       if (snapshot.hasError) {
@@ -60,7 +60,6 @@ class _CompteFormState extends State<CompteForm> {
     return Column(
       children: [
 
-        Image(image: AssetImage("assets/person1.png")),
 
         Container(
           padding: const EdgeInsets.fromLTRB(25.0, 20.0, 25.0, 20.0),
@@ -76,15 +75,10 @@ class _CompteFormState extends State<CompteForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  'Informations personnelle',
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.w900,
-                  ),
-                ),
+
+                Image(image: AssetImage("assets/person2.png")),
                 const SizedBox(
-                  height: 40.0,
+                  height: 10.0,
                 ),
                 TextFormField(
                   controller: nom,
@@ -95,7 +89,7 @@ class _CompteFormState extends State<CompteForm> {
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
                     ),
-                    hoverColor: Color(0xFFF65959),
+                    hoverColor: Color(0xFFE65100),
                     prefixIcon: Icon(Icons.person_outline,color: Colors.black,),
                     hintStyle: const TextStyle(
                       color: Colors.black26,
@@ -128,7 +122,7 @@ class _CompteFormState extends State<CompteForm> {
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
                     ),
-                    hoverColor: Color(0xFFF65959),
+                    hoverColor: Color(0xFFE65100),
                     prefixIcon: Icon(Icons.person_outlined,color: Colors.black,),
                     hintStyle: const TextStyle(
                       color: Colors.black26,
@@ -158,7 +152,7 @@ class _CompteFormState extends State<CompteForm> {
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
                     ),
-                    hoverColor: Color(0xFFF65959),
+                    hoverColor: Color(0xFFE65100),
                     prefixIcon: Icon(Icons.email_outlined,color: Colors.black,),
                     hintStyle: const TextStyle(
                       color: Colors.black26,
@@ -188,7 +182,7 @@ class _CompteFormState extends State<CompteForm> {
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
                     ),
-                    hoverColor: Color(0xFFF65959),
+                    hoverColor: Color(0xFFE65100),
                     prefixIcon: Icon(Icons.phone_android,color: Colors.black,),
                     hintStyle: const TextStyle(
                       color: Colors.black26,
@@ -220,7 +214,7 @@ class _CompteFormState extends State<CompteForm> {
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
                     ),
-                    hoverColor: Color(0xFFF65959),
+                    hoverColor: Color(0xFFE65100),
                     prefixIcon: Icon(Icons.password_outlined,color: Colors.black,),
                     hintStyle: const TextStyle(
                       color: Colors.black26,
@@ -252,7 +246,7 @@ class _CompteFormState extends State<CompteForm> {
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black),
                     ),
-                    hoverColor: Color(0xFFF65959),
+                    hoverColor: Color(0xFFE65100),
                     prefixIcon: Icon(Icons.password_outlined,color: Colors.black,),
                     hintStyle: const TextStyle(
                       color: Colors.black26,
@@ -292,7 +286,7 @@ class _CompteFormState extends State<CompteForm> {
 
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
-                      backgroundColor: Color(0xFFF65959),
+                      backgroundColor: Color(0xFFE65100),
                       shape: const StadiumBorder(),
                       padding: const EdgeInsets.symmetric(
                         vertical: 15,

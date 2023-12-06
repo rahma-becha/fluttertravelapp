@@ -19,7 +19,7 @@ class _RecommandationState extends State<Recommandation> {
         future: futureDestinations,
         builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.waiting) {
-        return const Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator(color: Colors.black,));
       }
 
       if (snapshot.hasError) {
@@ -94,7 +94,7 @@ class _RecommandationState extends State<Recommandation> {
                           children: [
                             Icon(
                               Icons.location_on,
-                              color: Color(0xFFF65959),
+                              color: Color(0xFFE65100),
                               size: 18,
                             ),
                             const SizedBox(width: 5),
